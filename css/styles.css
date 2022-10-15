@@ -7,11 +7,12 @@
   --secondary-bg-color: #f5f4fa;
   --dark-bg-color: #2f303a;
   --item-gap: 30px;
+  --cubic: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
   color: var(--primary-text-color);
-  font-family: 'Roboto', 'Verdana', sans-serif;
+  font-family: "Roboto", "Verdana", sans-serif;
   font-size: 14px;
   letter-spacing: 0.03em;
 }
@@ -74,7 +75,7 @@ ul {
   margin-right: 93px;
 
   color: var(--accent-text-color);
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 26px;
@@ -98,6 +99,7 @@ ul {
 }
 
 .navigation .link {
+  position: relative;
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -116,6 +118,17 @@ ul {
 
 .navigation .current {
   color: var(--accent-text-color);
+}
+
+.current::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--accent-text-color);
+  border-radius: 2px;
 }
 
 .header-contacts {
@@ -160,8 +173,12 @@ ul {
   max-width: 1600px;
   padding-top: 200px;
   padding-bottom: 200px;
-  background-image: linear-gradient(to right, rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
-    url('../images/hero.jpg');
+  background-image: linear-gradient(
+      to right,
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url("../images/hero.jpg");
   background-color: #c4c4c4;
   background-position: center;
   background-size: cover;
@@ -259,6 +276,27 @@ ul {
 .examples {
   display: flex;
   gap: var(--item-gap);
+}
+
+.example {
+  position: relative;
+}
+
+.example-image {
+  display: block;
+}
+
+.example-title {
+  position: absolute;
+  bottom: 0;
+
+  width: 370px;
+  padding: 27px 0;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: rgba(47, 48, 58, 0.8);
+  color: #ffffff;
 }
 
 /* Команда */
@@ -450,6 +488,58 @@ ul {
   background-color: var(--accent-text-color);
 }
 
+/* Модалка */
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 250ms var(--cubic);
+}
+
+.backdrop.is-hidden {
+  /* visibility: hidden; */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-width: 528px;
+  min-height: 581px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms var(--cubic);
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 /* Портфоліо */
 .buttons {
   display: flex;
@@ -500,6 +590,11 @@ ul {
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
+.project-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
 .project-image {
   display: block;
   max-width: 100%;
@@ -523,8 +618,30 @@ ul {
   letter-spacing: 0.06em;
 }
 
-.project-description {
+.project-type {
   color: var(--primary-text-color);
   font-size: 16px;
   line-height: 1.88;
+}
+
+.project-description {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  background-color: rgba(33, 150, 243, 0.9);
+  color: var(--white-text-color);
+  font-size: 18px;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+
+  transform: translateY(100%);
+  transition: transform 250ms var(--cubic);
+}
+
+.project-item:hover .project-description,
+.project-item:focus .project-description {
+  transform: translateY(0);
 }
