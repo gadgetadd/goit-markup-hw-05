@@ -12,7 +12,7 @@
 
 body {
   color: var(--primary-text-color);
-  font-family: "Roboto", "Verdana", sans-serif;
+  font-family: 'Roboto', 'Verdana', sans-serif;
   font-size: 14px;
   letter-spacing: 0.03em;
 }
@@ -75,7 +75,7 @@ ul {
   margin-right: 93px;
 
   color: var(--accent-text-color);
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 26px;
@@ -109,6 +109,8 @@ ul {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--cubic);
 }
 
 .navigation .link:hover,
@@ -121,10 +123,11 @@ ul {
 }
 
 .current::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: -1px;
+  display: inline-block;
   width: 100%;
   height: 4px;
   background-color: var(--accent-text-color);
@@ -149,6 +152,8 @@ ul {
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--cubic);
 }
 
 .header-contact:hover,
@@ -173,12 +178,8 @@ ul {
   max-width: 1600px;
   padding-top: 200px;
   padding-bottom: 200px;
-  background-image: linear-gradient(
-      to right,
-      rgba(47, 48, 58, 0.4),
-      rgba(47, 48, 58, 0.4)
-    ),
-    url("../images/hero.jpg");
+  background-image: linear-gradient(to right, rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+    url('../images/hero.jpg');
   background-color: #c4c4c4;
   background-position: center;
   background-size: cover;
@@ -218,6 +219,8 @@ ul {
   text-align: center;
   letter-spacing: 0.06em;
   cursor: pointer;
+
+  transition: background-color 250ms var(--cubic);
 }
 
 .hero-button:hover,
@@ -363,6 +366,8 @@ ul {
   height: 100%;
   border-radius: 50%;
   color: var(--icon-color);
+
+  transition: color 250ms var(--cubic), background-color 250ms var(--cubic);
 }
 
 .team-contact-icon {
@@ -394,6 +399,8 @@ ul {
   border: 1px solid var(--icon-color);
   border-radius: 4px;
   color: var(--icon-color);
+
+  transition: color 250ms var(--cubic), border-color 250ms var(--cubic);
 }
 
 .client-icon {
@@ -432,6 +439,8 @@ ul {
   font-style: normal;
   font-size: 14px;
   line-height: 1.71;
+
+  transition: color 250ms var(--cubic);
 }
 
 .address a:hover,
@@ -477,6 +486,8 @@ ul {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--white-text-color);
+
+  transition: background-color 250ms var(--cubic);
 }
 
 .studio-contact-icon {
@@ -497,11 +508,12 @@ ul {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
-  transition: opacity 250ms var(--cubic);
+  visibility: visible;
+  transition: opacity 250ms var(--cubic), visibility 250ms var(--cubic);
 }
 
 .backdrop.is-hidden {
-  /* visibility: hidden; */
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
 }
@@ -556,6 +568,7 @@ ul {
 
   color: var(--secondary-text-color);
   background-color: var(--secondary-bg-color);
+  box-shadow: none;
   cursor: pointer;
   font-family: inherit;
   font-style: normal;
@@ -564,6 +577,9 @@ ul {
   line-height: 1.62;
   text-align: center;
   letter-spacing: 0.03em;
+
+  transition: color 250ms var(--cubic), background-color 250ms var(--cubic),
+    box-shadow 250ms var(--cubic);
 }
 
 .button:hover,
@@ -584,8 +600,14 @@ ul {
   flex-basis: calc((100% - 2 * var(--item-gap)) / 3);
 }
 
-.project-item:hover,
-.project-item:focus {
+.project-link {
+  display: block;
+  box-shadow: none;
+  transition: box-shadow 250ms var(--cubic);
+}
+
+.project-link:hover,
+.project-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
@@ -628,9 +650,11 @@ ul {
   position: absolute;
   left: 0;
   top: 0;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100%;
-  padding: 63px 24px;
+  padding: 24px;
   background-color: rgba(33, 150, 243, 0.9);
   color: var(--white-text-color);
   font-size: 18px;
@@ -641,7 +665,7 @@ ul {
   transition: transform 250ms var(--cubic);
 }
 
-.project-item:hover .project-description,
-.project-item:focus .project-description {
+.project-link:hover .project-description,
+.project-link:focus .project-description {
   transform: translateY(0);
 }
